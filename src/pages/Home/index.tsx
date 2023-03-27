@@ -6,12 +6,22 @@ import { InfoTasks } from "./components/InfoTasks";
 import { TasksContainer, TasksContent } from "./styles";
 import { CheckCircle, Circle, Trash } from 'phosphor-react'
 
+interface Tasks {
+  id: number;
+  description: string;
+  status: string;
+}
+
 
 export function Home() {
-  const {tasks} = useContext(TasksContext)
+  const {tasks, removeTasks} = useContext(TasksContext)
 
-  function handleDeleteComment() {
+  function handleDeleteComment(task: Tasks) {
+    removeTasks(task)
+  }
 
+  function handleCheckedUnChecked(task: Tasks) {
+    
   }
   return (
     <>
@@ -49,9 +59,9 @@ export function Home() {
             <p className="concluded">{task.description} </p>
           )}
 
-          <button className="trash" onClick={handleDeleteComment} title="Deletar comentário">
-          <Trash size={24} />
-            </button>
+          <button className="trash" onClick={() => handleDeleteComment(task)}  title="Deletar comentário">
+            <Trash size={24} />
+          </button>
 
         </TasksContent>
       )

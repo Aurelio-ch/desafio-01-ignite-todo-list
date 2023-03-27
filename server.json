@@ -1,39 +1,12 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "description": "Estudar sobre os fundamento do Reactjs",
-      "status": "concluido"
+      "description": "Estudar React js",
+      "id": 1
     },
     {
-      "id": 2,
-      "description": "Trabalhar no projeto para fixar todo o conteúdo aprendido",
-      "status": "em andamento"
-    },
-    {
-      "id": 3,
-      "description": "Trabalhar no projeto para fixar todo o conteúdo aprendido Trabalhar no projeto para fixar todo o conteúdo aprendido Trabalhar no projeto para fixar todo o conteúdo aprendido",
-      "status": "concluido"
-    },
-    {
-      "description": "Trbalho",
-      "id": 4,
-      "status": "concluido"
-    },
-    {
-      "description": "Visitar meu amigo",
-      "id": 5,
-      "status": "em andamento"
-    },
-    {
-      "description": "teste",
-      "id": 6,
-      "status": "concluido"
-    },
-    {
-      "description": "fsffsfsf",
-      "id": 7,
-      "status": "em andamento"
+      "description": "Criar Projeto para aprofundar meu estudos",
+      "id": 2
     }
   ]
 }
