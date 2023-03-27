@@ -2,10 +2,12 @@
   "tasks": [
     {
       "description": "Estudar React js",
+      "status": "em andamento",
       "id": 1
     },
     {
       "description": "Criar Projeto para aprofundar meu estudos",
+      "status": "concluido",
       "id": 2
     },
     {
