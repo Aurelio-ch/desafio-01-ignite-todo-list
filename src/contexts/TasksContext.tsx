@@ -2,6 +2,7 @@ import { createContext, ReactNode, useCallback, useEffect, useState } from "reac
 import { api } from "../lib/axios";
 
 interface CreateTasksInput {
+  id: number
   description: string
 }
 
@@ -10,9 +11,15 @@ interface TasksContextType {
   fetchTasks: (tasks?: string) => Promise<void>
   createTasks: (tasks: CreateTasksInput) => Promise<void>
 }
+
+interface TasksDelete {
+  id: number
+}
+
 interface Tasks {
   id: number
   description: string
+  status: string
 }
 
 interface TasksProviderProps {
@@ -28,6 +35,8 @@ export function TasksProvider({ children }: TasksProviderProps) {
   const fetchTasks = useCallback(async (tasks?: string) => {
     const response = await api.get('tasks', {
       params: {
+        _sort: 'id',
+        _order: 'desc',
         q: tasks,
       },
     })    
@@ -49,7 +58,6 @@ export function TasksProvider({ children }: TasksProviderProps) {
     },
     [],
   )
-
   useEffect(() => {
     fetchTasks()
   }, [fetchTasks])
