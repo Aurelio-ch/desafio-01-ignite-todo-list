@@ -60,8 +60,22 @@ export function TasksProvider({ children }: TasksProviderProps) {
     const { id, status } = data
     if (status !== 'em andamento') {
       await api.patch(`tasks/${id}`, { status: 'em andamento' })
+      const upadeteTask = tasks.map((state) => {
+        if (state.id === id) {
+          return { ...state, status: 'em andamento' }
+        }
+        return state
+      })
+      SetTasks(upadeteTask)
     } else {
       await api.patch(`tasks/${id}`, { status: 'concluido' })
+      const upadeteTask = tasks.map((state) => {
+        if (state.id === id) {
+          return { ...state, status: 'concluido' }
+        }
+        return state
+      })
+      SetTasks(upadeteTask)
     }
   }
 
