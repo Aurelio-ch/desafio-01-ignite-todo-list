@@ -1,15 +1,15 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
-import { api } from "../lib/axios";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import { api } from '../lib/axios'
 
-
-
-interface TasksContextType {
-  tasks: Tasks[]
-  removeTasks: (tasks: Tasks) => Promise<void>
-  fetchTasks: (tasks?: string) => Promise<void>
-  createTasks: (tasks: Tasks) => Promise<void>
+interface CreateTasks {
+  description: string
 }
-
 
 interface Tasks {
   id: number
@@ -21,10 +21,17 @@ interface TasksProviderProps {
   children: ReactNode
 }
 
-export const TasksContext = createContext( {} as TasksContextType ) 
+interface TasksContextType {
+  tasks: Tasks[]
+  removeTasks: (tasks: Tasks) => Promise<void>
+  fetchTasks: (tasks?: string) => Promise<void>
+  createTasks: (tasks: Tasks) => Promise<void>
+  updateStatusTasks: (tasks: Tasks) => Promise<void>
+}
+
+export const TasksContext = createContext({} as TasksContextType)
 
 export function TasksProvider({ children }: TasksProviderProps) {
-
   const [tasks, SetTasks] = useState<Tasks[]>([])
 
   const fetchTasks = useCallback(async (tasks?: string) => {
@@ -34,14 +41,14 @@ export function TasksProvider({ children }: TasksProviderProps) {
         _order: 'desc',
         q: tasks,
       },
-    })    
-    
+    })
+
     SetTasks(response.data)
     console.log(response.data)
   }, [])
 
   async function removeTasks(data: Tasks) {
-    const {id} = data
+    const { id } = data
     await api.delete(`tasks/${id}`)
 
     const newAllTasks = tasks.filter((task) => task.id !== id)
@@ -49,28 +56,28 @@ export function TasksProvider({ children }: TasksProviderProps) {
     SetTasks(newAllTasks)
   }
 
-
-  async function updateStatusTasks(data: Tasks){
-
+  async function updateStatusTasks(data: Tasks) {
+    const { id, status } = data
+    if (status !== 'em andamento') {
+      await api.patch(`tasks/${id}`, { status: 'em andamento' })
+    } else {
+      await api.patch(`tasks/${id}`, { status: 'concluido' })
+    }
   }
 
+  const createTasks = useCallback(async (data: CreateTasks) => {
+    const { description } = data
 
-  const createTasks = useCallback(
-    async (data: Tasks) => {
-      const { description } = data
+    const response = await api.post('tasks', {
+      description,
+      status: 'em andamento',
+    })
 
-      const response = await api.post('tasks', {
-        description,
-      })
-
-      SetTasks((state) => [response.data, ...state])
-    },
-    [],
-  )
+    SetTasks((state) => [response.data, ...state])
+  }, [])
   useEffect(() => {
     fetchTasks()
   }, [fetchTasks])
-
 
   return (
     <TasksContext.Provider
@@ -79,6 +86,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
         fetchTasks,
         createTasks,
         removeTasks,
+        updateStatusTasks,
       }}
     >
       {children}

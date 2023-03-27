@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const CreateFormContainer = styled.form`
   display: flex;
@@ -28,13 +28,13 @@ export const CreateFormContainer = styled.form`
     border: 0;
     padding: 1rem;
     background-color: ${(props) => props.theme['blue-dark']};
-    color: ${(props) => props.theme['white']};
+    color: ${(props) => props.theme.white};
     font-weight: bold;
     border-radius: 6px;
     cursor: pointer;
 
-    &:hover{
-      background-color: ${(props) => props.theme['blue']};
+    &:hover {
+      background-color: ${(props) => props.theme.blue};
     }
     &:disabled {
       opacity: 0.7;

@@ -12,10 +12,8 @@ const createFormSchema = z.object({
 
 type CreateFormInputs = z.infer<typeof createFormSchema>
 
-
 export function CreateForm() {
-
-  const {createTasks} = useContext(TasksContext)
+  const { createTasks } = useContext(TasksContext)
 
   const {
     register,
@@ -36,17 +34,17 @@ export function CreateForm() {
   }
 
   return (
-  <CreateFormContainer onSubmit={handleSubmit(handleCreateTasks)}>
-    <input 
-      type="text" 
-      placeholder="Adicione uma nova tarefa"
-      {...register('description')}
-    />
+    <CreateFormContainer onSubmit={handleSubmit(handleCreateTasks)}>
+      <input
+        type="text"
+        placeholder="Adicione uma nova tarefa"
+        {...register('description')}
+      />
 
-    <button type="submit" disabled={isSubmitting}>
-      Criar
-      <PlusCircle size={24} />
-    </button>
-  </CreateFormContainer>
+      <button type="submit" disabled={isSubmitting}>
+        Criar
+        <PlusCircle size={24} />
+      </button>
+    </CreateFormContainer>
   )
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const InfoContainerTasks = styled.div`
   display: flex;
@@ -8,8 +8,6 @@ export const InfoContainerTasks = styled.div`
   margin: 4rem auto 0;
   padding: 0 2rem;
   justify-content: space-between;
-
-
 `
 interface InfoTasksProps {
   variant: 'blue' | 'purple'
@@ -17,14 +15,12 @@ interface InfoTasksProps {
 
 export const InfoTasksContent = styled.p<InfoTasksProps>`
   color: ${(props) =>
-      props.variant === 'blue'
-        ? props.theme['blue']
-        : props.theme['purple']};
+    props.variant === 'blue' ? props.theme.blue : props.theme.purple};
 
-  span{
+  span {
     background-color: ${(props) => props.theme['gray-400']};
     border-radius: 99999px;
-    padding: 0.2rem 0.7rem ;
-    color: ${(props) => props.theme['white']};
+    padding: 0.2rem 0.7rem;
+    color: ${(props) => props.theme.white};
   }
 `
