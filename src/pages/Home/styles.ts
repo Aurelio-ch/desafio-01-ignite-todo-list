@@ -78,3 +78,32 @@ export const TasksContent = styled.div`
     }
   }
 `
+export const NoTaskContainer = styled.div`
+  display: flex;
+  min-height: 4.69rem;
+  gap: 0.75rem;
+  margin: 1.5rem auto;
+  max-width: 1050px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 4rem 1.5rem;
+  border-top: 1px solid #333333;
+  border-radius: 8px;
+
+  svg {
+    color: ${(props) => props.theme['gray-400']};
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${(props) => props.theme['gray-300']};
+  }
+
+  span {
+    font-size: 16px;
+    font-weight: 400;
+    color: ${(props) => props.theme['gray-300']};
+  }
+`
