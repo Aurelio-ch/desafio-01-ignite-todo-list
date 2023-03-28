@@ -37,6 +37,7 @@ export function CreateForm() {
     <CreateFormContainer onSubmit={handleSubmit(handleCreateTasks)}>
       <input
         type="text"
+        required
         placeholder="Adicione uma nova tarefa"
         {...register('description')}
       />

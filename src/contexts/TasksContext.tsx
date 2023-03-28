@@ -12,6 +12,12 @@ interface CreateTasks {
 }
 
 interface Tasks {
+  id?: number
+  description: string
+  status?: string
+}
+
+interface ArrayTasks {
   id: number
   description: string
   status: string
@@ -22,7 +28,7 @@ interface TasksProviderProps {
 }
 
 interface TasksContextType {
-  tasks: Tasks[]
+  tasks: ArrayTasks[]
   removeTasks: (tasks: Tasks) => Promise<void>
   fetchTasks: (tasks?: string) => Promise<void>
   createTasks: (tasks: Tasks) => Promise<void>
@@ -32,7 +38,7 @@ interface TasksContextType {
 export const TasksContext = createContext({} as TasksContextType)
 
 export function TasksProvider({ children }: TasksProviderProps) {
-  const [tasks, SetTasks] = useState<Tasks[]>([])
+  const [tasks, SetTasks] = useState<ArrayTasks[]>([])
 
   const fetchTasks = useCallback(async (tasks?: string) => {
     const response = await api.get('tasks', {
@@ -44,7 +50,6 @@ export function TasksProvider({ children }: TasksProviderProps) {
     })
 
     SetTasks(response.data)
-    console.log(response.data)
   }, [])
 
   async function removeTasks(data: Tasks) {
@@ -89,6 +94,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
     SetTasks((state) => [response.data, ...state])
   }, [])
+
   useEffect(() => {
     fetchTasks()
   }, [fetchTasks])
